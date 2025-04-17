@@ -44,7 +44,6 @@ export default function StepCvCoverLetter() {
 
   // instant show after file upload
   const watchCv = form.watch("cv");
-  const watchCoverLetter = form.watch("coverLetter");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -175,8 +174,7 @@ export default function StepCvCoverLetter() {
                       </div>
                       <FormControl>
                         <QuillEditor
-                          key={watchCoverLetter}
-                          value={field.value}
+                          value={field.value || ""}
                           onChange={field.onChange}
                           placeholder="Type your cover letter here."
                         />

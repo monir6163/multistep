@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// components/QuillEditor.tsx
 "use client";
 
 import type Quill from "quill";
@@ -45,12 +44,14 @@ export default function QuillEditor({
           placeholder: placeholder || "Write something...",
         });
 
+        // Handle text change
         quillRef.current.on("text-change", () => {
           if (quillRef.current) {
             onChange(quillRef.current.root.innerHTML);
           }
         });
 
+        // Set initial value
         if (value) {
           quillRef.current.root.innerHTML = value;
         }
@@ -69,6 +70,12 @@ export default function QuillEditor({
       isMounted.current = false;
     };
   }, []);
+
+  useEffect(() => {
+    if (quillRef.current && quillRef.current.root.innerHTML !== value) {
+      quillRef.current.root.innerHTML = value || "";
+    }
+  }, [value]);
 
   return <div ref={editorRef} className="h-[150px]" />;
 }
